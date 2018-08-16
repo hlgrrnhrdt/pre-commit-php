@@ -47,6 +47,9 @@ do
     phpmd_files_to_check+=",$file"
 done
 
+echo $phpmd_files_to_check
+exit 1
+
 phpmd_args=$1
 
 phpmd_command="${phpmd_command} ${phpmd_files_to_check} text ${phpmd_args}"
