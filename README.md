@@ -146,3 +146,19 @@ The tool will fail a build when it has found issues that violate the configured 
 A bash script that will run the appropriate [PHP Copy Paste Detector](https://github.com/sebastianbergmann/phpcpd) executable and report on duplicate code.
 
 The tool will fail a build when it has found issues that violate the configured code rules. This will accept all arguments, in particular you'll want to tune for `----min-lines=`, `--min-tokens=`, and `--fuzzy`.
+
+## phpstan (PHP7 only)
+
+[PHPStan](https://github.com/phpstan/phpstan) focuses on finding errors in your code without actually running it. It catches whole classes of bugs even before you write tests for the code.
+
+
+```yaml
+- repo: https://github.com/hlgrrnhrdt/pre-commit-php.git
+  sha: master
+  hooks:
+  - id: php-stan
+    files: \.(php)$
+    args: ["--configuration=phpstan.neon --level=5"]
+ ```
+
+A bash script that will run the appropriate `phpstan` executable.
