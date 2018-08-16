@@ -44,17 +44,17 @@ fi
 phpmd_files_to_check="${@:2}"
 phpmd_args=$1
 
-phpmd_command="$phpmd_command $phpmd_files_to_check text $phpmd_args"
+for file in ${@:2}
+    phpmd_command="$phpmd_command $file text $phpmd_args"
 
-echo "Running command $phpmd_command"
-exit 1
-command_result=`eval $phpmd_command`
-if [[ $command_result =~ ERROR ]]
-then
-    echo "${msg_color_magenta}Errors detected by PHP Mess Detector ... ${msg_color_none}"
-    echo "$command_result"
-    exit 1
-fi
+    echo "Running command $phpmd_command"
+    command_result=`eval $phpmd_command`
+    if [[ $command_result =~ ERROR ]]
+    then
+        echo "${msg_color_magenta}Errors detected by PHP Mess Detector ... ${msg_color_none}"
+        echo "$command_result"
+        exit 1
+    fi
 
 exit 0
 
