@@ -13,9 +13,6 @@
 # Arguments
 # - None
 
-echo $*
-exit 1
-
 # Echo Colors
 msg_color_magenta='\033[1;35m'
 msg_color_yellow='\033[0;33m'
@@ -51,7 +48,6 @@ phpmd_command="${phpmd_command} ${phpmd_files_to_check} text ${phpmd_args}"
 
 echo "Running command $phpmd_command"
 command_result=`eval $phpmd_command`
-exit 1
 if [[ $command_result =~ ERROR ]]
 then
     echo "${msg_color_magenta}Errors detected by PHP Mess Detector ... ${msg_color_none}"
