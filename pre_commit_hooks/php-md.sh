@@ -48,13 +48,13 @@ do
 done
 
 echo $phpmd_files_to_check
-exit 1
 
 phpmd_args=$1
 
 phpmd_command="${phpmd_command} ${phpmd_files_to_check} text ${phpmd_args}"
 
 echo "Running command $phpmd_command"
+exit 1
 command_result=`eval $phpmd_command`
 if [[ $command_result =~ ERROR ]]
 then
