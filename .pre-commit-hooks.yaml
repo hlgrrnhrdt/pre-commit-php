@@ -54,3 +54,10 @@
   entry: pre_commit_hooks/php-cpd.sh
   language: script
   files: \.php$
+
+- id: php-stan
+  name: PHP Static Analysis Tool
+  description: Run PHP static analysis against all staged files. Requires PHP7
+  entry: pre_commit_hooks/php-stan.sh
+  language: script
+  files: \.php$
