@@ -42,7 +42,7 @@ else
 fi
 
 phpmd_files_to_check="${@:2}"
-phpmd_args=$1
+phpmd_args=$2
 
 phpmd_command="$phpmd_command $phpmd_files_to_check text $phpmd_args"
 
