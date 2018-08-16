@@ -18,7 +18,7 @@ msg_color_magenta='\033[1;35m'
 msg_color_yellow='\033[0;33m'
 msg_color_none='\033[0m' # No Color
 
-# Loop through the list of paths to run php codesniffer against
+# Loop through the list of paths to run php mess detector against
 echo "${msg_color_yellow}Begin PHP Mess Detector ...${msg_color_none}"
 phpmd_local_exec="phpmd.phar"
 phpmd_command="php $phpmd_local_exec"
@@ -26,7 +26,6 @@ phpmd_command="php $phpmd_local_exec"
 # Check vendor/bin/phpunit
 phpmd_vendor_command="vendor/bin/phpmd"
 phpmd_global_command="phpmd"
-
 if [ -f "$phpmd_vendor_command" ]; then
     phpmd_command=$phpmd_vendor_command
 else
@@ -42,14 +41,12 @@ else
     fi
 fi
 
-echo "${phpmd_command}"
-exit 1
-
 phpmd_files_to_check="${@:2}"
 phpmd_args=$1
 phpmd_command="$phpmd_command $phpmd_args $phpmd_files_to_check"
 
 echo "Running command $phpmd_command"
+exit 1
 command_result=`eval $phpmd_command`
 if [[ $command_result =~ ERROR ]]
 then
