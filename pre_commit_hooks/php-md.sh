@@ -41,12 +41,7 @@ else
     fi
 fi
 
-phpmd_files_to_check=""
-for file in ${@:2}
-do
-    phpmd_files_to_check+=",$file"
-done
-
+phpmd_files_to_check="${@:2}"
 phpmd_args=$1
 
 phpmd_command="${phpmd_command} ${phpmd_files_to_check} ${phpmd_args}"
