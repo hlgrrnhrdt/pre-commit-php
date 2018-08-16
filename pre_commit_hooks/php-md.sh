@@ -13,6 +13,9 @@
 # Arguments
 # - None
 
+echo $*
+exit 1
+
 # Echo Colors
 msg_color_magenta='\033[1;35m'
 msg_color_yellow='\033[0;33m'
