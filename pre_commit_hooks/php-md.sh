@@ -49,7 +49,7 @@ done
 
 phpmd_args=$1
 
-phpmd_command="${phpmd_command} ${phpmd_files_to_check} text ${phpmd_args}"
+phpmd_command="${phpmd_command} ${phpmd_files_to_check} ${phpmd_args}
 
 echo "Running command $phpmd_command"
 exit 1
