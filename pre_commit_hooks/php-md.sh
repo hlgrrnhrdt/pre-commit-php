@@ -43,16 +43,26 @@ else
 fi
 
 phpmd_files_to_check="${@:2}"
+phpmd_files_to_check=$(echo $phpmd_files_to_check | tr " " "\n")
 phpmd_args=$1
 
-phpmd_command="${phpmd_command} ${phpmd_files_to_check} text ${phpmd_args}"
+error_message=""
+php_errors_found=false
+for file in $phpmd_files_to_check
+do
+    phpmd_command_file="${phpmd_command} ${file} text ${phpmd_args}"
+    echo "Running command $phpmd_command_file"
+    command_result=$(${phpmd_command_file})
+    if [[ $? -ne 0 ]]
+    then
+        echo "${msg_color_magenta}Errors detected by PHP CodeSniffer in ${file} ... ${msg_color_none}"
+        echo "${command_result}"
+        php_errors_found=true
+    fi
+done
 
-echo "Running command $phpmd_command"
-command_result=$(${phpmd_command})
-if [[ $? -ne 0 ]]
+if [ "$php_errors_found" = true ]
 then
-    echo "${msg_color_magenta}Errors detected by PHP CodeSniffer ... ${msg_color_none}"
-    echo "${command_result}"
     exit 1
 fi
 
