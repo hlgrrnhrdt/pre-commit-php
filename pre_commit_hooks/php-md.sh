@@ -49,15 +49,10 @@ phpmd_command="${phpmd_command} ${phpmd_files_to_check} text ${phpmd_args}"
 
 echo "Running command $phpmd_command"
 command_result=`eval $phpmd_command`
-if [[ $command_result -eq 1 ]]; then
+if [[ $command_result =~ ERROR ]]
+then
     echo "${msg_color_magenta}Errors detected by PHP Mess Detector ... ${msg_color_none}"
     echo "$command_result"
-    echo -en "${bldred}Please review and commit.${txtrst}\n"
-    exit 1
-elif [[ $RETURN -eq 2 ]]; then
-    echo "${msg_color_magenta}Errors detected by PHP Mess Detector ... ${msg_color_none}"
-    echo "$command_result"
-    echo -en "${bldred}Please review and commit.${txtrst}\n"
     exit 1
 fi
 
