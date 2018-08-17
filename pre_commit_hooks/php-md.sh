@@ -24,7 +24,7 @@ echo "${msg_color_yellow}Begin PHP Mess Detector ...${msg_color_none}"
 phpmd_local_exec="phpmd.phar"
 phpmd_command="php $phpmd_local_exec"
 
-# Check vendor/bin/phpunit
+# Check vendor/bin/phpmd
 phpmd_vendor_command="vendor/bin/phpmd"
 phpmd_global_command="phpmd"
 if [ -f "$phpmd_vendor_command" ]; then
@@ -49,10 +49,15 @@ phpmd_command="${phpmd_command} ${phpmd_files_to_check} text ${phpmd_args}"
 
 echo "Running command $phpmd_command"
 command_result=`eval $phpmd_command`
-if [[ $command_result =~ ERROR ]]
-then
+if [[ $command_result -eq 1 ]]; then
     echo "${msg_color_magenta}Errors detected by PHP Mess Detector ... ${msg_color_none}"
     echo "$command_result"
+    echo -en "${bldred}Please review and commit.${txtrst}\n"
+    exit 1
+elif [[ $RETURN -eq 2 ]]; then
+    echo "${msg_color_magenta}Errors detected by PHP Mess Detector ... ${msg_color_none}"
+    echo "$command_result"
+    echo -en "${bldred}Please review and commit.${txtrst}\n"
     exit 1
 fi
 
