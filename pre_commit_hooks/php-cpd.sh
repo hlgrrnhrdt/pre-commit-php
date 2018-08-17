@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 ################################################################################
 #
 # Bash PHP Copy Paste Detector
@@ -42,13 +42,13 @@ do
 done;
 
 # Run the command with the full list of files
-echo -e "${txtgrn}  $exec_command --no-interaction --ansi${args}${files}${txtrst}"
+echo "${txtgrn}  $exec_command --no-interaction --ansi${args}${files}${txtrst}"
 OUTPUT="$($exec_command${args}${files})"
 RETURN=$?
 if [ $RETURN -ne 0 ]; then
-    echo -en "\n${txtylw}${title} found copied lines in the following files:${txtrst}\n  "
-    echo -en "$OUTPUT" | awk -v m=3 -v n=2 'NR<=m{next};NR>n+m{print line[NR%n]};{line[NR%n]=$0}'
-    echo -en "\n${bldred}Please review and commit.${txtrst}\n"
+    echo "\n${txtylw}${title} found copied lines in the following files:${txtrst}"
+    echo "$OUTPUT" | awk -v m=3 -v n=2 'NR<=m{next};NR>n+m{print line[NR%n]};{line[NR%n]=$0}'
+    echo "\n${bldred}Please review and commit.${txtrst}"
     exit 1
 fi
 exit 0
