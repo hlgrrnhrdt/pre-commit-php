@@ -48,11 +48,11 @@ phpmd_args=$1
 phpmd_command="${phpmd_command} ${phpmd_files_to_check} text ${phpmd_args}"
 
 echo "Running command $phpmd_command"
-command_result=`eval $phpmd_command`
-if [[ $command_result =~ ERROR ]]
+command_result=$(${phpmd_command})
+if [[ $? -ne 0 ]]
 then
-    echo "${msg_color_magenta}Errors detected by PHP Mess Detector ... ${msg_color_none}"
-    echo "$command_result"
+    echo "${msg_color_magenta}Errors detected by PHP CodeSniffer ... ${msg_color_none}"
+    echo "${command_result}"
     exit 1
 fi
 
